@@ -50,6 +50,16 @@ Gating is enforced when buying, when building a deck, and re-checked when a batt
 
 Dark oak background, parchment panels, gold-leaf accents, ember-red for damage and emerald for healing. Headings in Cinzel (carved-stone feel), body in Crimson Pro. Cards have an ornate gold frame with a gem showing mana cost; rarity gem colors (common grey, rare blue, epic purple, legendary orange). Playing a card slides it onto the board; attacks lunge toward the target with a hit flash; damage numbers pop. Gym/crime results appear as parchment scrolls.
 
+## Card artwork is swappable
+
+Each card's art is a separate image, not baked into the card design, so it can be changed any time:
+
+- Every card ships with generated default art that fills the frame's art window.
+- A **Card Art** manager page lets you pick any card and upload your own image; it is cropped to the art window and appears everywhere that card shows (shop, deck builder, battle board).
+- Uploads go to cloud file storage; the card row keeps the image address, and a "Reset to default" button restores the original art.
+- Optional per-player art: a custom image you upload applies only to your own copy of the card, unless you set it as the global default for the whole game (admin-only).
+
+
 ## Technical details
 
 **Backend: Lovable Cloud** (enabled as the first implementation step). Email/password auth.
