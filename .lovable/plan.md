@@ -66,11 +66,13 @@ Each card's art is a separate image, not baked into the card design, so it can b
 
 Tables (all with row-level security and grants):
 - `profiles` — user_id, name, level, xp, cash, strength, defense, speed, dexterity, energy, nerve, life, energy_updated_at, nerve_updated_at, life_updated_at, hospital_until, wins, losses
-- `cards` — static catalog seeded by migration (name, type, cost, attack, health, keywords, effect JSON, rarity, price, requirements JSON)
-- `player_cards` — user_id, card_id, quantity
+- `cards` — static catalog seeded by migration (name, type, cost, attack, health, keywords, effect JSON, rarity, price, requirements JSON, `art_url`, `default_art_url`)
+- `player_cards` — user_id, card_id, quantity, `custom_art_url` (null = use the card's art)
 - `decks` — user_id, card_ids[] (active deck)
 - `battles` — id, attacker_id, defender_id / npc_id, state JSON, turn, status, created_at
 - `crimes` (static seed) and `crime_log`, `npcs` (static seed)
+- Storage bucket `card-art` (public read, authenticated write scoped to the uploader's folder)
+
 
 Server functions (`createServerFn` under `src/lib/*.functions.ts`), all authenticated:
 - `getProfile` (applies regen math and hospital release), `train`, `commitCrime`, `buyCard`, `saveDeck`
