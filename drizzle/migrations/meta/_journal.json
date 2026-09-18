@@ -15,6 +15,13 @@
       "when": 1789714912444,
       "tag": "0001_seed_cards_crimes_npcs",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789714952378,
+      "tag": "0002_card_art_storage_policies",
+      "breakpoints": true
     }
   ]
 }
