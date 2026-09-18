@@ -78,6 +78,8 @@ Server functions (`createServerFn` under `src/lib/*.functions.ts`), all authenti
 - `getProfile` (applies regen math and hospital release), `train`, `commitCrime`, `buyCard`, `saveDeck`
 - `startBattle`, `playBattleAction` (play card / attack / end turn), which validates the move, mutates battle state, runs the AI turn, checks win/lose, and pays rewards. The battle engine is a pure TypeScript module shared for client-side previews and server-side authority, so the client can never cheat.
 - `listOpponents` — NPC ladder plus other players not in hospital.
+- `setCardArt` / `resetCardArt` — validates the upload (image type, size cap), stores it, and updates the art address.
+
 
 Frontend: TanStack Start routes under `_authenticated/` for all game pages; TanStack Query for data; battle board built with Motion for React animations; design tokens in `src/styles.css` (oklch), fonts loaded via `<link>` in the root route. Each route gets its own head metadata.
 
