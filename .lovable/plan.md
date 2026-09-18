@@ -50,22 +50,36 @@ Gating is enforced when buying, when building a deck, and re-checked when a batt
 
 Dark oak background, parchment panels, gold-leaf accents, ember-red for damage and emerald for healing. Headings in Cinzel (carved-stone feel), body in Crimson Pro. Cards have an ornate gold frame with a gem showing mana cost; rarity gem colors (common grey, rare blue, epic purple, legendary orange). Playing a card slides it onto the board; attacks lunge toward the target with a hit flash; damage numbers pop. Gym/crime results appear as parchment scrolls.
 
+## Card artwork is swappable
+
+Each card's art is a separate image, not baked into the card design, so it can be changed any time:
+
+- Every card ships with generated default art that fills the frame's art window.
+- A **Card Art** manager page lets you pick any card and upload your own image; it is cropped to the art window and appears everywhere that card shows (shop, deck builder, battle board).
+- Uploads go to cloud file storage; the card row keeps the image address, and a "Reset to default" button restores the original art.
+- Optional per-player art: a custom image you upload applies only to your own copy of the card, unless you set it as the global default for the whole game (admin-only).
+
+
 ## Technical details
 
 **Backend: Lovable Cloud** (enabled as the first implementation step). Email/password auth.
 
 Tables (all with row-level security and grants):
 - `profiles` — user_id, name, level, xp, cash, strength, defense, speed, dexterity, energy, nerve, life, energy_updated_at, nerve_updated_at, life_updated_at, hospital_until, wins, losses
-- `cards` — static catalog seeded by migration (name, type, cost, attack, health, keywords, effect JSON, rarity, price, requirements JSON)
-- `player_cards` — user_id, card_id, quantity
+- `cards` — static catalog seeded by migration (name, type, cost, attack, health, keywords, effect JSON, rarity, price, requirements JSON, `art_url`, `default_art_url`)
+- `player_cards` — user_id, card_id, quantity, `custom_art_url` (null = use the card's art)
 - `decks` — user_id, card_ids[] (active deck)
 - `battles` — id, attacker_id, defender_id / npc_id, state JSON, turn, status, created_at
 - `crimes` (static seed) and `crime_log`, `npcs` (static seed)
+- Storage bucket `card-art` (public read, authenticated write scoped to the uploader's folder)
+
 
 Server functions (`createServerFn` under `src/lib/*.functions.ts`), all authenticated:
 - `getProfile` (applies regen math and hospital release), `train`, `commitCrime`, `buyCard`, `saveDeck`
 - `startBattle`, `playBattleAction` (play card / attack / end turn), which validates the move, mutates battle state, runs the AI turn, checks win/lose, and pays rewards. The battle engine is a pure TypeScript module shared for client-side previews and server-side authority, so the client can never cheat.
 - `listOpponents` — NPC ladder plus other players not in hospital.
+- `setCardArt` / `resetCardArt` — validates the upload (image type, size cap), stores it, and updates the art address.
+
 
 Frontend: TanStack Start routes under `_authenticated/` for all game pages; TanStack Query for data; battle board built with Motion for React animations; design tokens in `src/styles.css` (oklch), fonts loaded via `<link>` in the root route. Each route gets its own head metadata.
 
@@ -73,7 +87,7 @@ Frontend: TanStack Start routes under `_authenticated/` for all game pages; TanS
 
 1. Enable Lovable Cloud, auth pages, profile creation, tavern home with timers.
 2. Gym and Crimes.
-3. Card catalog seed, Shop with stat gating, Deck Builder.
+3. Card catalog seed with default art, Shop with stat gating, Deck Builder, Card Art upload manager.
 4. Battle engine (pure module) + NPC AI + unit tests for rules.
 5. Battle screen UI and Arena (NPC ladder, then player attacks).
 6. Hospital, rewards, polish and animations.
