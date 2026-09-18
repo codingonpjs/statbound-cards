@@ -87,7 +87,7 @@ Frontend: TanStack Start routes under `_authenticated/` for all game pages; TanS
 
 1. Enable Lovable Cloud, auth pages, profile creation, tavern home with timers.
 2. Gym and Crimes.
-3. Card catalog seed, Shop with stat gating, Deck Builder.
+3. Card catalog seed with default art, Shop with stat gating, Deck Builder, Card Art upload manager.
 4. Battle engine (pure module) + NPC AI + unit tests for rules.
 5. Battle screen UI and Arena (NPC ladder, then player attacks).
 6. Hospital, rewards, polish and animations.
