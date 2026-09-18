@@ -49,6 +49,7 @@ export type Database = {
       }
       cards: {
         Row: {
+          art_key: string
           art_url: string | null
           attack: number
           cost: number
@@ -66,6 +67,7 @@ export type Database = {
           type: string
         }
         Insert: {
+          art_key?: string
           art_url?: string | null
           attack?: number
           cost: number
@@ -83,6 +85,7 @@ export type Database = {
           type: string
         }
         Update: {
+          art_key?: string
           art_url?: string | null
           attack?: number
           cost?: number

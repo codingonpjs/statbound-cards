@@ -1,0 +1,82 @@
+alter table public.cards add column art_key text not null default 'brawler';
+
+insert into public.cards (id,name,type,cost,attack,health,durability,keywords,effect,rarity,price,requirements,flavor,art_key) values
+-- tier 1
+('tavern_rat','Tavern Rat','minion',1,1,1,0,'{}',null,'common',50,'{}','It has seen things under the floorboards.','beast'),
+('bar_brawler','Bar Brawler','minion',2,3,2,0,'{}',null,'common',100,'{}','Swings first, thinks never.','brawler'),
+('stable_hand','Stable Hand','minion',2,2,3,0,'{}',null,'common',100,'{}','Handy with a pitchfork.','brawler'),
+('dice_cheat','Dice Cheat','minion',3,3,3,0,'{}',null,'common',150,'{}','Loaded, like his dice.','rogue'),
+('hearth_hound','Hearth Hound','minion',3,4,2,0,'{}',null,'common',150,'{}','Sleeps by the fire, bites by the door.','beast'),
+('wandering_bard','Wandering Bard','minion',4,3,4,0,'{}',null,'common',200,'{}','Three chords and a grudge.','bard'),
+('cellar_troll','Cellar Troll','minion',5,5,5,0,'{}',null,'common',250,'{}','Rent-free since the siege.','brawler'),
+('tankard_smash','Tankard Smash','spell',1,0,0,0,'{}','{"kind":"damage","amount":2,"target":"any"}','common',100,'{}','Pewter meets forehead.','spell'),
+('first_aid_swig','First Aid Swig','spell',1,0,0,0,'{}','{"kind":"heal","amount":4,"target":"hero"}','common',100,'{}','Medicinal. Mostly.','spell'),
+('rally_cry','Rally Cry','spell',2,0,0,0,'{}','{"kind":"buff","attack":1,"health":1,"target":"friendly_minions"}','common',150,'{}','For the house!','spell'),
+('rusty_cleaver','Rusty Cleaver','weapon',2,2,0,2,'{}',null,'common',150,'{}','Kitchen issued.','weapon'),
+-- tier 2
+('ironhide_bouncer','Ironhide Bouncer','minion',4,3,6,0,'{taunt}',null,'rare',300,'{"defense":60}','No boots, no entry.','bouncer'),
+('shieldwall_guard','Shieldwall Guard','minion',3,2,5,0,'{taunt}',null,'rare',250,'{"defense":60}','Paid by the hour.','bouncer'),
+('quickblade_rogue','Quickblade Rogue','minion',3,4,2,0,'{charge}',null,'rare',300,'{"speed":60,"dexterity":40}','Gone before the echo.','rogue'),
+('pit_fighter','Pit Fighter','minion',4,5,4,0,'{}',null,'rare',300,'{"strength":60}','Undefeated in the cellar circuit.','brawler'),
+('hedge_mage','Hedge Mage','minion',4,3,3,0,'{}','{"kind":"damage","amount":2,"target":"any"}','rare',350,'{"dexterity":60}','Battlecry: deal 2 damage.','mage'),
+('alley_cutpurse','Alley Cutpurse','minion',2,2,2,0,'{}','{"kind":"draw","amount":1}','rare',300,'{"dexterity":60}','Battlecry: draw a card.','rogue'),
+('hound_master','Hound Master','minion',5,4,5,0,'{}',null,'rare',350,'{"strength":60}','Whistles once.','beast'),
+('cinder_moth','Cinder Moth','minion',2,3,1,0,'{charge}',null,'rare',250,'{"speed":60}','Drawn to anything burning.','beast'),
+('ember_bolt','Ember Bolt','spell',2,0,0,0,'{}','{"kind":"damage","amount":3,"target":"any"}','rare',250,'{"strength":60}','Thrown, not cast.','spell'),
+('tavern_song','Tavern Song','spell',3,0,0,0,'{}','{"kind":"draw","amount":2}','rare',300,'{}','Everyone knows the second verse.','spell'),
+('bracing_brew','Bracing Brew','spell',2,0,0,0,'{}','{"kind":"heal","amount":8,"target":"hero"}','rare',250,'{"defense":60}','Tastes like a decision.','spell'),
+('barkeeps_bat','Barkeep''s Bat','weapon',3,3,0,3,'{}',null,'rare',300,'{"strength":60}','Kept under the counter.','weapon'),
+-- tier 3
+('stoneback_ogre','Stoneback Ogre','minion',6,6,7,0,'{taunt}',null,'epic',600,'{"defense":180,"level":5}','Load-bearing.','bouncer'),
+('blade_dancer','Blade Dancer','minion',4,4,4,0,'{charge}',null,'epic',650,'{"speed":180,"dexterity":120,"level":5}','Counts in cuts.','rogue'),
+('duelist_of_the_dunes','Duelist of the Dunes','minion',5,6,3,0,'{divine_shield}',null,'epic',650,'{"dexterity":200,"level":5}','First blood is never hers.','rogue'),
+('warhound_alpha','Warhound Alpha','minion',5,5,5,0,'{charge}',null,'epic',700,'{"strength":200,"level":5}','The pack follows.','beast'),
+('flame_adept','Flame Adept','minion',5,4,4,0,'{}','{"kind":"aoe","amount":2,"target":"enemy_minions"}','epic',700,'{"strength":150,"dexterity":150,"level":5}','Battlecry: 2 damage to all enemy minions.','mage'),
+('grave_tender','Grave Tender','minion',4,3,5,0,'{}','{"kind":"heal","amount":6,"target":"hero"}','epic',550,'{"defense":150,"level":5}','Battlecry: restore 6 health.','bard'),
+('mirror_shade','Mirror Shade','minion',3,3,3,0,'{divine_shield}',null,'epic',550,'{"speed":150,"level":5}','You swung at a reflection.','mage'),
+('firestorm','Firestorm','spell',4,0,0,0,'{}','{"kind":"aoe","amount":3,"target":"enemy_minions"}','epic',700,'{"strength":200,"level":5}','The tab is on fire.','spell'),
+('iron_resolve','Iron Resolve','spell',3,0,0,0,'{}','{"kind":"buff","attack":2,"health":2,"target":"friendly_minions"}','epic',650,'{"defense":200,"level":5}','Shoulders back.','spell'),
+('assassinate','Assassinate','spell',5,0,0,0,'{}','{"kind":"damage","amount":8,"target":"any"}','epic',750,'{"dexterity":250,"level":6}','One name, one coin.','spell'),
+('twin_fangs','Twin Fangs','weapon',4,4,0,3,'{}',null,'epic',650,'{"speed":200,"level":5}','Matched pair.','weapon'),
+-- tier 4
+('gatekeeper_thrum','Gatekeeper Thrum','minion',7,7,9,0,'{taunt}',null,'epic',1200,'{"defense":450,"level":10}','The door is him.','bouncer'),
+('nightveil_assassin','Nightveil Assassin','minion',5,7,4,0,'{charge}',null,'epic',1400,'{"dexterity":450,"speed":300,"level":10}','Contracted, never contacted.','rogue'),
+('arcanist_vel','Arcanist Vel','minion',6,5,6,0,'{}','{"kind":"damage","amount":5,"target":"any"}','epic',1350,'{"strength":350,"dexterity":350,"level":10}','Battlecry: deal 5 damage.','mage'),
+('bloodrage_berserker','Bloodrage Berserker','minion',6,8,5,0,'{}',null,'epic',1300,'{"strength":500,"level":10}','Stops when the room does.','brawler'),
+('sanctum_paladin','Sanctum Paladin','minion',6,5,7,0,'{taunt,divine_shield}',null,'epic',1400,'{"defense":400,"level":10}','Polished, patient, immovable.','bouncer'),
+('cataclysm','Cataclysm','spell',6,0,0,0,'{}','{"kind":"aoe","amount":5,"target":"enemy_minions"}','epic',1400,'{"strength":450,"level":10}','Rebuild later.','spell'),
+('second_wind','Second Wind','spell',4,0,0,0,'{}','{"kind":"multi","effects":[{"kind":"heal","amount":15,"target":"hero"},{"kind":"draw","amount":1}]}','epic',1250,'{"defense":400,"level":10}','Still standing.','spell'),
+('warlords_greataxe','Warlord''s Greataxe','weapon',5,5,0,2,'{}',null,'epic',1300,'{"strength":400,"level":10}','Two hands, one purpose.','weapon'),
+-- tier 5
+('grond_the_unbroken','Grond the Unbroken','minion',8,8,12,0,'{taunt}',null,'legendary',2500,'{"defense":900,"level":15}','Legend: the wall that ate a siege.','champion'),
+('silque_the_whisper','Silque the Whisper','minion',6,9,5,0,'{charge,divine_shield}',null,'legendary',2800,'{"dexterity":900,"speed":700,"level":15}','Legend: no witnesses, only rumours.','champion'),
+('emberqueen_valla','Emberqueen Valla','minion',8,7,7,0,'{}','{"kind":"aoe","amount":4,"target":"enemy_minions"}','legendary',2700,'{"strength":900,"level":15}','Battlecry: 4 damage to all enemy minions.','champion'),
+('champion_of_the_tavern','Champion of the Tavern','minion',9,10,10,0,'{charge}',null,'legendary',4000,'{"strength":700,"defense":700,"speed":700,"dexterity":700,"level":20}','Legend: the last name on the board.','champion');
+
+insert into public.crimes (id,name,description,nerve_cost,base_success,stat,stat_divisor,cash_min,cash_max,xp,fail_hospital_minutes) values
+('pickpocket','Pickpocket','Lift a purse from a distracted merchant.',2,0.55,'dexterity',20,40,120,4,0),
+('shake_down','Shake Down a Debtor','Lean on someone who owes the house money.',3,0.50,'strength',25,90,240,7,3),
+('smuggle_casks','Smuggle Casks','Move untaxed ale past the gate watch.',5,0.45,'speed',30,220,520,14,6),
+('burgle_manor','Burgle the Manor','Silverware, and whatever else fits.',7,0.38,'dexterity',35,480,1100,26,12),
+('rig_the_pit','Rig the Fight Pit','Fix tonight''s card and collect on the odds.',9,0.34,'defense',40,900,2100,42,20),
+('caravan_heist','Caravan Heist','Take the guild caravan on the north road.',12,0.28,'strength',45,1800,4200,70,35);
+
+insert into public.npcs (id,name,tier,strength,defense,speed,dexterity,reward_cash,reward_xp,hospital_minutes,deck,blurb) values
+('tavern_drunk','The Tavern Drunk',1,5,5,5,5,120,10,3,
+ '{tavern_rat,tavern_rat,bar_brawler,bar_brawler,stable_hand,stable_hand,dice_cheat,hearth_hound,hearth_hound,wandering_bard,cellar_troll,tankard_smash,tankard_smash,first_aid_swig,rally_cry,rusty_cleaver,tavern_rat,bar_brawler,dice_cheat,wandering_bard}',
+ 'He has lost every fight and remembers none of them.'),
+('door_warden','Door Warden Boz',2,60,90,40,50,320,26,6,
+ '{shieldwall_guard,shieldwall_guard,ironhide_bouncer,ironhide_bouncer,stable_hand,stable_hand,pit_fighter,pit_fighter,bracing_brew,bracing_brew,rally_cry,cellar_troll,cellar_troll,barkeeps_bat,hound_master,wandering_bard,bar_brawler,bar_brawler,tankard_smash,first_aid_swig}',
+ 'Nobody gets past the coat rack.'),
+('gutter_knives','The Gutter Knives',3,140,90,200,220,720,55,10,
+ '{cinder_moth,cinder_moth,quickblade_rogue,quickblade_rogue,alley_cutpurse,alley_cutpurse,dice_cheat,blade_dancer,blade_dancer,mirror_shade,duelist_of_the_dunes,twin_fangs,ember_bolt,ember_bolt,tankard_smash,tavern_song,hearth_hound,bar_brawler,rusty_cleaver,assassinate}',
+ 'A gang that fights like one bad idea with six knives.'),
+('pit_champion','Pit Champion Harka',4,420,300,260,240,1500,110,16,
+ '{pit_fighter,pit_fighter,warhound_alpha,warhound_alpha,bloodrage_berserker,stoneback_ogre,stoneback_ogre,cellar_troll,hound_master,firestorm,firestorm,ember_bolt,iron_resolve,warlords_greataxe,barkeeps_bat,flame_adept,flame_adept,rally_cry,bar_brawler,pit_fighter}',
+ 'Fourteen straight nights on the sand.'),
+('guild_magus','Guild Magus Orrin',5,520,480,400,520,3200,190,24,
+ '{hedge_mage,hedge_mage,flame_adept,flame_adept,arcanist_vel,arcanist_vel,mirror_shade,mirror_shade,firestorm,cataclysm,second_wind,sanctum_paladin,sanctum_paladin,gatekeeper_thrum,iron_resolve,assassinate,grave_tender,tavern_song,ember_bolt,duelist_of_the_dunes}',
+ 'Reads the room, then rewrites it.'),
+('tavern_king','The Tavern King',6,950,950,900,900,7500,420,40,
+ '{champion_of_the_tavern,grond_the_unbroken,silque_the_whisper,emberqueen_valla,gatekeeper_thrum,sanctum_paladin,nightveil_assassin,nightveil_assassin,bloodrage_berserker,arcanist_vel,cataclysm,cataclysm,second_wind,warlords_greataxe,firestorm,iron_resolve,stoneback_ogre,warhound_alpha,blade_dancer,assassinate}',
+ 'Holds the house, the board and the last word.');
