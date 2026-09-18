@@ -14,16 +14,362 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      battles: {
+        Row: {
+          attacker_id: string
+          created_at: string
+          defender_id: string | null
+          id: string
+          npc_id: string | null
+          state: Json
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          attacker_id: string
+          created_at?: string
+          defender_id?: string | null
+          id?: string
+          npc_id?: string | null
+          state: Json
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          attacker_id?: string
+          created_at?: string
+          defender_id?: string | null
+          id?: string
+          npc_id?: string | null
+          state?: Json
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      cards: {
+        Row: {
+          art_url: string | null
+          attack: number
+          cost: number
+          default_art_url: string | null
+          durability: number
+          effect: Json | null
+          flavor: string | null
+          health: number
+          id: string
+          keywords: string[]
+          name: string
+          price: number
+          rarity: string
+          requirements: Json
+          type: string
+        }
+        Insert: {
+          art_url?: string | null
+          attack?: number
+          cost: number
+          default_art_url?: string | null
+          durability?: number
+          effect?: Json | null
+          flavor?: string | null
+          health?: number
+          id: string
+          keywords?: string[]
+          name: string
+          price: number
+          rarity?: string
+          requirements?: Json
+          type: string
+        }
+        Update: {
+          art_url?: string | null
+          attack?: number
+          cost?: number
+          default_art_url?: string | null
+          durability?: number
+          effect?: Json | null
+          flavor?: string | null
+          health?: number
+          id?: string
+          keywords?: string[]
+          name?: string
+          price?: number
+          rarity?: string
+          requirements?: Json
+          type?: string
+        }
+        Relationships: []
+      }
+      crime_log: {
+        Row: {
+          cash: number
+          created_at: string
+          crime_id: string
+          id: string
+          message: string | null
+          success: boolean
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          cash?: number
+          created_at?: string
+          crime_id: string
+          id?: string
+          message?: string | null
+          success: boolean
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          cash?: number
+          created_at?: string
+          crime_id?: string
+          id?: string
+          message?: string | null
+          success?: boolean
+          user_id?: string
+          xp?: number
+        }
+        Relationships: []
+      }
+      crimes: {
+        Row: {
+          base_success: number
+          cash_max: number
+          cash_min: number
+          description: string
+          fail_hospital_minutes: number
+          id: string
+          name: string
+          nerve_cost: number
+          stat: string
+          stat_divisor: number
+          xp: number
+        }
+        Insert: {
+          base_success: number
+          cash_max: number
+          cash_min: number
+          description: string
+          fail_hospital_minutes?: number
+          id: string
+          name: string
+          nerve_cost: number
+          stat: string
+          stat_divisor: number
+          xp: number
+        }
+        Update: {
+          base_success?: number
+          cash_max?: number
+          cash_min?: number
+          description?: string
+          fail_hospital_minutes?: number
+          id?: string
+          name?: string
+          nerve_cost?: number
+          stat?: string
+          stat_divisor?: number
+          xp?: number
+        }
+        Relationships: []
+      }
+      decks: {
+        Row: {
+          card_ids: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          card_ids?: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          card_ids?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      npcs: {
+        Row: {
+          blurb: string | null
+          deck: string[]
+          defense: number
+          dexterity: number
+          hospital_minutes: number
+          id: string
+          name: string
+          reward_cash: number
+          reward_xp: number
+          speed: number
+          strength: number
+          tier: number
+        }
+        Insert: {
+          blurb?: string | null
+          deck: string[]
+          defense: number
+          dexterity: number
+          hospital_minutes: number
+          id: string
+          name: string
+          reward_cash: number
+          reward_xp: number
+          speed: number
+          strength: number
+          tier: number
+        }
+        Update: {
+          blurb?: string | null
+          deck?: string[]
+          defense?: number
+          dexterity?: number
+          hospital_minutes?: number
+          id?: string
+          name?: string
+          reward_cash?: number
+          reward_xp?: number
+          speed?: number
+          strength?: number
+          tier?: number
+        }
+        Relationships: []
+      }
+      player_cards: {
+        Row: {
+          card_id: string
+          custom_art_url: string | null
+          id: string
+          quantity: number
+          user_id: string
+        }
+        Insert: {
+          card_id: string
+          custom_art_url?: string | null
+          id?: string
+          quantity?: number
+          user_id: string
+        }
+        Update: {
+          card_id?: string
+          custom_art_url?: string | null
+          id?: string
+          quantity?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "player_cards_card_id_fkey"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "cards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          cash: number
+          created_at: string
+          defense: number
+          dexterity: number
+          energy: number
+          energy_updated_at: string
+          hospital_until: string | null
+          level: number
+          life: number
+          life_updated_at: string
+          losses: number
+          name: string
+          nerve: number
+          nerve_updated_at: string
+          speed: number
+          strength: number
+          user_id: string
+          wins: number
+          xp: number
+        }
+        Insert: {
+          cash?: number
+          created_at?: string
+          defense?: number
+          dexterity?: number
+          energy?: number
+          energy_updated_at?: string
+          hospital_until?: string | null
+          level?: number
+          life?: number
+          life_updated_at?: string
+          losses?: number
+          name: string
+          nerve?: number
+          nerve_updated_at?: string
+          speed?: number
+          strength?: number
+          user_id: string
+          wins?: number
+          xp?: number
+        }
+        Update: {
+          cash?: number
+          created_at?: string
+          defense?: number
+          dexterity?: number
+          energy?: number
+          energy_updated_at?: string
+          hospital_until?: string | null
+          level?: number
+          life?: number
+          life_updated_at?: string
+          losses?: number
+          name?: string
+          nerve?: number
+          nerve_updated_at?: string
+          speed?: number
+          strength?: number
+          user_id?: string
+          wins?: number
+          xp?: number
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +496,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const

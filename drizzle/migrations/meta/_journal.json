@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789714812049,
+      "tag": "0000_tavern_brawl_core",
+      "breakpoints": true
+    }
+  ]
 }
