@@ -1,0 +1,1 @@
+create policy "own crime log insert" on public.crime_log for insert to authenticated with check (user_id = auth.uid());
