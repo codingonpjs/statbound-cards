@@ -10,33 +10,94 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedCrimesRouteImport } from './routes/_authenticated/crimes'
+import { Route as AuthenticatedGymRouteImport } from './routes/_authenticated/gym'
+import { Route as AuthenticatedHospitalRouteImport } from './routes/_authenticated/hospital'
+import { Route as AuthenticatedTavernRouteImport } from './routes/_authenticated/tavern'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedCrimesRoute = AuthenticatedCrimesRouteImport.update({
+  id: '/crimes',
+  path: '/crimes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedGymRoute = AuthenticatedGymRouteImport.update({
+  id: '/gym',
+  path: '/gym',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHospitalRoute = AuthenticatedHospitalRouteImport.update({
+  id: '/hospital',
+  path: '/hospital',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTavernRoute = AuthenticatedTavernRouteImport.update({
+  id: '/tavern',
+  path: '/tavern',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/crimes': typeof AuthenticatedCrimesRoute
+  '/gym': typeof AuthenticatedGymRoute
+  '/hospital': typeof AuthenticatedHospitalRoute
+  '/tavern': typeof AuthenticatedTavernRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/crimes': typeof AuthenticatedCrimesRoute
+  '/gym': typeof AuthenticatedGymRoute
+  '/hospital': typeof AuthenticatedHospitalRoute
+  '/tavern': typeof AuthenticatedTavernRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/crimes': typeof AuthenticatedCrimesRoute
+  '/_authenticated/gym': typeof AuthenticatedGymRoute
+  '/_authenticated/hospital': typeof AuthenticatedHospitalRoute
+  '/_authenticated/tavern': typeof AuthenticatedTavernRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/auth' | '/crimes' | '/gym' | '/hospital' | '/tavern'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/auth' | '/crimes' | '/gym' | '/hospital' | '/tavern'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/crimes'
+    | '/_authenticated/gym'
+    | '/_authenticated/hospital'
+    | '/_authenticated/tavern'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +109,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/crimes': {
+      id: '/_authenticated/crimes'
+      path: '/crimes'
+      fullPath: '/crimes'
+      preLoaderRoute: typeof AuthenticatedCrimesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/gym': {
+      id: '/_authenticated/gym'
+      path: '/gym'
+      fullPath: '/gym'
+      preLoaderRoute: typeof AuthenticatedGymRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/hospital': {
+      id: '/_authenticated/hospital'
+      path: '/hospital'
+      fullPath: '/hospital'
+      preLoaderRoute: typeof AuthenticatedHospitalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/tavern': {
+      id: '/_authenticated/tavern'
+      path: '/tavern'
+      fullPath: '/tavern'
+      preLoaderRoute: typeof AuthenticatedTavernRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCrimesRoute: typeof AuthenticatedCrimesRoute
+  AuthenticatedGymRoute: typeof AuthenticatedGymRoute
+  AuthenticatedHospitalRoute: typeof AuthenticatedHospitalRoute
+  AuthenticatedTavernRoute: typeof AuthenticatedTavernRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCrimesRoute: AuthenticatedCrimesRoute,
+  AuthenticatedGymRoute: AuthenticatedGymRoute,
+  AuthenticatedHospitalRoute: AuthenticatedHospitalRoute,
+  AuthenticatedTavernRoute: AuthenticatedTavernRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
