@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedArenaRouteImport } from './routes/_authenticated/arena'
+import { Route as AuthenticatedCardArtRouteImport } from './routes/_authenticated/card-art'
 import { Route as AuthenticatedCrimesRouteImport } from './routes/_authenticated/crimes'
 import { Route as AuthenticatedDeckRouteImport } from './routes/_authenticated/deck'
 import { Route as AuthenticatedGymRouteImport } from './routes/_authenticated/gym'
@@ -32,6 +34,16 @@ const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedArenaRoute = AuthenticatedArenaRouteImport.update({
+  id: '/arena',
+  path: '/arena',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCardArtRoute = AuthenticatedCardArtRouteImport.update({
+  id: '/card-art',
+  path: '/card-art',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedCrimesRoute = AuthenticatedCrimesRouteImport.update({
   id: '/crimes',
@@ -67,6 +79,8 @@ const AuthenticatedTavernRoute = AuthenticatedTavernRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/arena': typeof AuthenticatedArenaRoute
+  '/card-art': typeof AuthenticatedCardArtRoute
   '/crimes': typeof AuthenticatedCrimesRoute
   '/deck': typeof AuthenticatedDeckRoute
   '/gym': typeof AuthenticatedGymRoute
@@ -77,6 +91,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/arena': typeof AuthenticatedArenaRoute
+  '/card-art': typeof AuthenticatedCardArtRoute
   '/crimes': typeof AuthenticatedCrimesRoute
   '/deck': typeof AuthenticatedDeckRoute
   '/gym': typeof AuthenticatedGymRoute
@@ -89,6 +105,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/arena': typeof AuthenticatedArenaRoute
+  '/_authenticated/card-art': typeof AuthenticatedCardArtRoute
   '/_authenticated/crimes': typeof AuthenticatedCrimesRoute
   '/_authenticated/deck': typeof AuthenticatedDeckRoute
   '/_authenticated/gym': typeof AuthenticatedGymRoute
@@ -101,6 +119,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/arena'
+    | '/card-art'
     | '/crimes'
     | '/deck'
     | '/gym'
@@ -111,6 +131,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/arena'
+    | '/card-art'
     | '/crimes'
     | '/deck'
     | '/gym'
@@ -122,6 +144,8 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/arena'
+    | '/_authenticated/card-art'
     | '/_authenticated/crimes'
     | '/_authenticated/deck'
     | '/_authenticated/gym'
@@ -158,6 +182,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/arena': {
+      id: '/_authenticated/arena'
+      path: '/arena'
+      fullPath: '/arena'
+      preLoaderRoute: typeof AuthenticatedArenaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/card-art': {
+      id: '/_authenticated/card-art'
+      path: '/card-art'
+      fullPath: '/card-art'
+      preLoaderRoute: typeof AuthenticatedCardArtRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/crimes': {
       id: '/_authenticated/crimes'
@@ -205,6 +243,8 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedArenaRoute: typeof AuthenticatedArenaRoute
+  AuthenticatedCardArtRoute: typeof AuthenticatedCardArtRoute
   AuthenticatedCrimesRoute: typeof AuthenticatedCrimesRoute
   AuthenticatedDeckRoute: typeof AuthenticatedDeckRoute
   AuthenticatedGymRoute: typeof AuthenticatedGymRoute
@@ -214,6 +254,8 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedArenaRoute: AuthenticatedArenaRoute,
+  AuthenticatedCardArtRoute: AuthenticatedCardArtRoute,
   AuthenticatedCrimesRoute: AuthenticatedCrimesRoute,
   AuthenticatedDeckRoute: AuthenticatedDeckRoute,
   AuthenticatedGymRoute: AuthenticatedGymRoute,
