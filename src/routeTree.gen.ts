@@ -13,8 +13,10 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedCrimesRouteImport } from './routes/_authenticated/crimes'
+import { Route as AuthenticatedDeckRouteImport } from './routes/_authenticated/deck'
 import { Route as AuthenticatedGymRouteImport } from './routes/_authenticated/gym'
 import { Route as AuthenticatedHospitalRouteImport } from './routes/_authenticated/hospital'
+import { Route as AuthenticatedShopRouteImport } from './routes/_authenticated/shop'
 import { Route as AuthenticatedTavernRouteImport } from './routes/_authenticated/tavern'
 
 const IndexRoute = IndexRouteImport.update({
@@ -36,6 +38,11 @@ const AuthenticatedCrimesRoute = AuthenticatedCrimesRouteImport.update({
   path: '/crimes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDeckRoute = AuthenticatedDeckRouteImport.update({
+  id: '/deck',
+  path: '/deck',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedGymRoute = AuthenticatedGymRouteImport.update({
   id: '/gym',
   path: '/gym',
@@ -44,6 +51,11 @@ const AuthenticatedGymRoute = AuthenticatedGymRouteImport.update({
 const AuthenticatedHospitalRoute = AuthenticatedHospitalRouteImport.update({
   id: '/hospital',
   path: '/hospital',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedShopRoute = AuthenticatedShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedTavernRoute = AuthenticatedTavernRouteImport.update({
@@ -56,16 +68,20 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/crimes': typeof AuthenticatedCrimesRoute
+  '/deck': typeof AuthenticatedDeckRoute
   '/gym': typeof AuthenticatedGymRoute
   '/hospital': typeof AuthenticatedHospitalRoute
+  '/shop': typeof AuthenticatedShopRoute
   '/tavern': typeof AuthenticatedTavernRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/crimes': typeof AuthenticatedCrimesRoute
+  '/deck': typeof AuthenticatedDeckRoute
   '/gym': typeof AuthenticatedGymRoute
   '/hospital': typeof AuthenticatedHospitalRoute
+  '/shop': typeof AuthenticatedShopRoute
   '/tavern': typeof AuthenticatedTavernRoute
 }
 export interface FileRoutesById {
@@ -74,23 +90,43 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/crimes': typeof AuthenticatedCrimesRoute
+  '/_authenticated/deck': typeof AuthenticatedDeckRoute
   '/_authenticated/gym': typeof AuthenticatedGymRoute
   '/_authenticated/hospital': typeof AuthenticatedHospitalRoute
+  '/_authenticated/shop': typeof AuthenticatedShopRoute
   '/_authenticated/tavern': typeof AuthenticatedTavernRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/crimes' | '/gym' | '/hospital' | '/tavern'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/crimes'
+    | '/deck'
+    | '/gym'
+    | '/hospital'
+    | '/shop'
+    | '/tavern'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/crimes' | '/gym' | '/hospital' | '/tavern'
+  to:
+    | '/'
+    | '/auth'
+    | '/crimes'
+    | '/deck'
+    | '/gym'
+    | '/hospital'
+    | '/shop'
+    | '/tavern'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/crimes'
+    | '/_authenticated/deck'
     | '/_authenticated/gym'
     | '/_authenticated/hospital'
+    | '/_authenticated/shop'
     | '/_authenticated/tavern'
   fileRoutesById: FileRoutesById
 }
@@ -130,6 +166,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCrimesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/deck': {
+      id: '/_authenticated/deck'
+      path: '/deck'
+      fullPath: '/deck'
+      preLoaderRoute: typeof AuthenticatedDeckRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/gym': {
       id: '/_authenticated/gym'
       path: '/gym'
@@ -144,6 +187,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHospitalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/shop': {
+      id: '/_authenticated/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof AuthenticatedShopRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/tavern': {
       id: '/_authenticated/tavern'
       path: '/tavern'
@@ -156,15 +206,19 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedCrimesRoute: typeof AuthenticatedCrimesRoute
+  AuthenticatedDeckRoute: typeof AuthenticatedDeckRoute
   AuthenticatedGymRoute: typeof AuthenticatedGymRoute
   AuthenticatedHospitalRoute: typeof AuthenticatedHospitalRoute
+  AuthenticatedShopRoute: typeof AuthenticatedShopRoute
   AuthenticatedTavernRoute: typeof AuthenticatedTavernRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCrimesRoute: AuthenticatedCrimesRoute,
+  AuthenticatedDeckRoute: AuthenticatedDeckRoute,
   AuthenticatedGymRoute: AuthenticatedGymRoute,
   AuthenticatedHospitalRoute: AuthenticatedHospitalRoute,
+  AuthenticatedShopRoute: AuthenticatedShopRoute,
   AuthenticatedTavernRoute: AuthenticatedTavernRoute,
 }
 
