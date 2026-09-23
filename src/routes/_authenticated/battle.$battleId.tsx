@@ -203,8 +203,7 @@ function BattlePage() {
   const customArt = battle.data?.customArt ?? {};
 
   const mutation = useMutation({
-    mutationFn: (action: Parameters<typeof playAction>[0] extends never ? never : unknown) =>
-      doAction({ data: { battleId, action } as never }),
+    mutationFn: (action: BattleAction) => doAction({ data: { battleId, action } }),
     onSuccess: (response) => {
       setLiveState(response.state);
       setPendingCard(null);
