@@ -226,8 +226,8 @@ function BattlePage() {
     },
   });
 
-  function send(action: unknown) {
-    mutation.mutate(action as never);
+  function send(action: BattleAction) {
+    mutation.mutate(action);
   }
 
   if (battle.isLoading || !state) {
