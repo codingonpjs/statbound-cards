@@ -20,6 +20,7 @@ import { Route as AuthenticatedGymRouteImport } from './routes/_authenticated/gy
 import { Route as AuthenticatedHospitalRouteImport } from './routes/_authenticated/hospital'
 import { Route as AuthenticatedShopRouteImport } from './routes/_authenticated/shop'
 import { Route as AuthenticatedTavernRouteImport } from './routes/_authenticated/tavern'
+import { Route as AuthenticatedBattleBattleIdRouteImport } from './routes/_authenticated/battle.$battleId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -75,6 +76,12 @@ const AuthenticatedTavernRoute = AuthenticatedTavernRouteImport.update({
   path: '/tavern',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedBattleBattleIdRoute =
+  AuthenticatedBattleBattleIdRouteImport.update({
+    id: '/battle/$battleId',
+    path: '/battle/$battleId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/hospital': typeof AuthenticatedHospitalRoute
   '/shop': typeof AuthenticatedShopRoute
   '/tavern': typeof AuthenticatedTavernRoute
+  '/battle/$battleId': typeof AuthenticatedBattleBattleIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,6 +107,7 @@ export interface FileRoutesByTo {
   '/hospital': typeof AuthenticatedHospitalRoute
   '/shop': typeof AuthenticatedShopRoute
   '/tavern': typeof AuthenticatedTavernRoute
+  '/battle/$battleId': typeof AuthenticatedBattleBattleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,6 +122,7 @@ export interface FileRoutesById {
   '/_authenticated/hospital': typeof AuthenticatedHospitalRoute
   '/_authenticated/shop': typeof AuthenticatedShopRoute
   '/_authenticated/tavern': typeof AuthenticatedTavernRoute
+  '/_authenticated/battle/$battleId': typeof AuthenticatedBattleBattleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/hospital'
     | '/shop'
     | '/tavern'
+    | '/battle/$battleId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/hospital'
     | '/shop'
     | '/tavern'
+    | '/battle/$battleId'
   id:
     | '__root__'
     | '/'
@@ -152,6 +164,7 @@ export interface FileRouteTypes {
     | '/_authenticated/hospital'
     | '/_authenticated/shop'
     | '/_authenticated/tavern'
+    | '/_authenticated/battle/$battleId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -239,6 +252,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTavernRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/battle/$battleId': {
+      id: '/_authenticated/battle/$battleId'
+      path: '/battle/$battleId'
+      fullPath: '/battle/$battleId'
+      preLoaderRoute: typeof AuthenticatedBattleBattleIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -251,6 +271,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedHospitalRoute: typeof AuthenticatedHospitalRoute
   AuthenticatedShopRoute: typeof AuthenticatedShopRoute
   AuthenticatedTavernRoute: typeof AuthenticatedTavernRoute
+  AuthenticatedBattleBattleIdRoute: typeof AuthenticatedBattleBattleIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -262,6 +283,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHospitalRoute: AuthenticatedHospitalRoute,
   AuthenticatedShopRoute: AuthenticatedShopRoute,
   AuthenticatedTavernRoute: AuthenticatedTavernRoute,
+  AuthenticatedBattleBattleIdRoute: AuthenticatedBattleBattleIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
