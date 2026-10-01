@@ -112,7 +112,7 @@ export const commitCrime = createServerFn({ method: "POST" })
 
     const updated = await supabase
       .from("profiles")
-      .update(patch)
+      .update(patch as never)
       .eq("user_id", userId)
       .select("*")
       .single();
