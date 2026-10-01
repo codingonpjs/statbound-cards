@@ -288,7 +288,7 @@ export function createBattle(opts: {
   enemyStats: CombatStats;
   seed?: number;
 }): BattleState {
-  const seed = opts.seed ?? Math.floor(Math.random() * 2147483647) || 1;
+  const seed = opts.seed ?? (Math.floor(Math.random() * 2147483647) || 1);
   const state: BattleState = {
     player: makeSide("player", opts.playerName, opts.playerDeck, opts.playerStats, seed),
     enemy: makeSide("enemy", opts.enemyName, opts.enemyDeck, opts.enemyStats, seed + 7),

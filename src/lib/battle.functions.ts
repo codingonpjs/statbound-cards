@@ -318,7 +318,10 @@ export const playAction = createServerFn({ method: "POST" })
         reward = { cash: 0, xp: 0, hospitalMinutes };
       }
 
-      const updated = await supabase.from("profiles").update(patch).eq("user_id", userId);
+      const updated = await supabase
+        .from("profiles")
+        .update(patch as never)
+        .eq("user_id", userId);
       if (updated.error) throw new Error(updated.error.message);
     }
 

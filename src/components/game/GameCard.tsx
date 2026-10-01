@@ -38,14 +38,14 @@ export function GameCard({
   showRequirements = true,
 }: {
   card: CardDef;
-  customArt?: string | null;
-  locked?: boolean;
-  size?: "sm" | "md";
-  footer?: React.ReactNode;
-  onClick?: () => void;
-  selected?: boolean;
-  className?: string;
-  showRequirements?: boolean;
+  customArt?: string | null | undefined;
+  locked?: boolean | undefined;
+  size?: "sm" | "md" | undefined;
+  footer?: React.ReactNode | undefined;
+  onClick?: (() => void) | undefined;
+  selected?: boolean | undefined;
+  className?: string | undefined;
+  showRequirements?: boolean | undefined;
 }) {
   const isMinion = card.type === "minion";
   const isWeapon = card.type === "weapon";
@@ -55,7 +55,7 @@ export function GameCard({
       initial={{ opacity: 0, y: 14, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
-      whileHover={onClick ? { y: -6 } : undefined}
+      whileHover={onClick ? { y: -6 } : {}}
       onClick={onClick}
       className={cn(
         "relative flex flex-col overflow-hidden rounded-xl bg-card ring-2 shadow-[var(--shadow-card)]",

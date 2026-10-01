@@ -93,9 +93,13 @@ function DeckPage() {
 
   function add(cardId: string, ownedQuantity: number) {
     const current = counts.get(cardId) ?? 0;
-    if (deck.length >= deckSize) return toast.error(`A deck holds exactly ${deckSize} cards.`);
+    if (deck.length >= deckSize) {
+      toast.error(`A deck holds exactly ${deckSize} cards.`);
+      return;
+    }
     if (current >= Math.min(maxCopies, ownedQuantity)) {
-      return toast.error("You have no more copies of that card.");
+      toast.error("You have no more copies of that card.");
+      return;
     }
     setDeck((prev) => [...prev, cardId]);
   }
