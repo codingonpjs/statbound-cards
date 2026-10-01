@@ -13,6 +13,7 @@ import { artFor } from "@/lib/game/art";
 import { getBattle, playAction } from "@/lib/battle.functions";
 import { hasTaunt } from "@/lib/game/engine";
 import type {
+  BattleAction,
   BattleState,
   CardDef,
   MinionState,
@@ -69,8 +70,8 @@ function HeroPanel({
   align,
 }: {
   side: SideState;
-  onClick?: () => void;
-  targetable?: boolean;
+  onClick?: (() => void) | undefined;
+  targetable?: boolean | undefined;
   align: "top" | "bottom";
 }) {
   return (
@@ -124,10 +125,10 @@ function MinionChip({
   minion: MinionState;
   cards: Map<string, CardDef>;
   customArt: Record<string, string>;
-  onClick?: () => void;
-  selected?: boolean;
-  targetable?: boolean;
-  exhausted?: boolean;
+  onClick?: (() => void) | undefined;
+  selected?: boolean | undefined;
+  targetable?: boolean | undefined;
+  exhausted?: boolean | undefined;
 }) {
   const card = cards.get(minion.cardId);
 
@@ -388,7 +389,7 @@ function BattlePage() {
                       initial={{ opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 24 }}
-                      whileHover={myTurn ? { y: -8 } : undefined}
+                      whileHover={myTurn ? { y: -8 } : {}}
                       onClick={() => handleHandClick(index, card)}
                       className={cn(
                         "w-28 cursor-pointer overflow-hidden rounded-lg bg-card ring-2 ring-border",
